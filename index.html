@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Добавление случайных чисел в таблицу</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 8px;
+            text-align: center;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<p>Нажмите кнопку, чтобы добавить случайное число в таблицу.</p>
+
+<table id="numbersTable">
+    <thead>
+        <tr>
+            <th>№</th>
+            <th>Случайное число</th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+<button onclick="addRandomNumber()">Добавить случайное число</button>
+
+<script>
+    let numbers = Array.from({ length: 30 }, () => Math.floor(Math.random() * 100));
+
+    function displayNumbers() {
+        const tableBody = document.getElementById('numbersTable').getElementsByTagName('tbody')[0];
+        tableBody.innerHTML = '';  
+
+        numbers.forEach((number, index) => {
+            const row = tableBody.insertRow();
+            const cell1 = row.insertCell(0);
+            const cell2 = row.insertCell(1);
+            cell1.textContent = index + 1;  
+            cell2.textContent = number;     
+        });
+    }
+
+    function addRandomNumber() {
+        const randomNumber = Math.floor(Math.random() * 100); 
+        numbers.push(randomNumber); 
+        displayNumbers(); 
+    }
+
+    displayNumbers();
+</script>
+
+</body>
+</html>
